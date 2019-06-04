@@ -1,0 +1,96 @@
+/**
+ * @file /include/star_gui/qnode.hpp
+ *
+ * @brief Communications central!
+ *
+ * @date February 2011
+ **/
+/*****************************************************************************
+** Ifdefs
+*****************************************************************************/
+
+#ifndef star_gui_QNODE_HPP_
+#define star_gui_QNODE_HPP_
+
+/*****************************************************************************
+** Includes
+*****************************************************************************/
+
+// To workaround boost/qt4 problems that won't be bugfixed. Refer to
+//    https://bugreports.qt.io/browse/QTBUG-22829
+#ifndef Q_MOC_RUN
+#include <ros/ros.h>
+#endif
+#include <string>
+#include <QThread>
+#include <QStringListModel>
+#include <geometry_msgs/Wrench.h>
+
+
+/*****************************************************************************
+** Namespaces
+*****************************************************************************/
+
+namespace star_gui {
+
+/*****************************************************************************
+** Class
+*****************************************************************************/
+
+class QNode : public QThread {
+    Q_OBJECT
+public:
+	QNode(int argc, char** argv );
+	virtual ~QNode();
+	bool init();
+	bool init(const std::string &master_url, const std::string &host_url);
+	void getForce(const geometry_msgs::Wrench & _data);
+	void run();
+
+	/*********************
+	** Logging
+	**********************/
+	enum LogLevel {
+	         Debug,
+	         Info,
+	         Warn,
+	         Error,
+	         Fatal
+	 };
+
+	QStringListModel* loggingModel() { return &logging_model; }
+	void log( const LogLevel &level, const std::string &msg);
+
+	geometry_msgs::Wrench force_val;
+	bool accept_stitch;
+	bool repeat_stitch;
+	bool send_points;
+	bool half_drive;
+	bool full_drive;
+
+	float x_offset;
+	float y_offset;
+
+
+Q_SIGNALS:
+	void loggingUpdated();
+   	void rosShutdown();
+	void forceUpdated();
+
+private:
+	int init_argc;
+	char** init_argv;
+	ros::Publisher offset_publisher;
+	ros::Publisher accept_stitch_publisher;
+	ros::Publisher repeat_stitch_publisher;
+	ros::Publisher send_points_publisher;
+	ros::Publisher half_drive_publisher;
+	ros::Publisher full_drive_publisher;
+
+	ros::Subscriber force_subscriber;
+	QStringListModel logging_model;
+};
+
+}  // namespace star_gui
+
+#endif /* star_gui_QNODE_HPP_ */
