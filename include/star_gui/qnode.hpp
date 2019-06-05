@@ -25,7 +25,7 @@
 #include <QThread>
 #include <QStringListModel>
 #include <geometry_msgs/Wrench.h>
-
+#include <geometry_msgs/WrenchStamped.h>
 
 /*****************************************************************************
 ** Namespaces
@@ -44,7 +44,7 @@ public:
 	virtual ~QNode();
 	bool init();
 	bool init(const std::string &master_url, const std::string &host_url);
-	void getForce(const geometry_msgs::Wrench & _data);
+	void getForce(const geometry_msgs::WrenchStamped & _data);
 	void run();
 
 	/*********************

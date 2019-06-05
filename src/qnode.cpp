@@ -15,6 +15,8 @@
 #include <string>
 #include <std_msgs/String.h>
 #include <geometry_msgs/Twist.h>
+#include <geometry_msgs/WrenchStamped.h>
+#include <geometry_msgs/Wrench.h>
 #include <std_msgs/Bool.h>
 #include <std_msgs/Float32.h>
 #include <sstream>
@@ -44,14 +46,15 @@ QNode::~QNode() {
 }
 
 
-void QNode::getForce(const geometry_msgs::Wrench & _data){
+void QNode::getForce(const geometry_msgs::WrenchStamped & _data){
 	
 	//std_msgs::String msg;
 	//std::stringstream ss;
 	//ss <<_data.data;
 	//msg.data = ss.str();
-	this->force_val = _data;
-	//log(Info,std::string("I received a force reading"));
+	this->force_val = _data.wrench;
+        //ROS_INFO("force x is: %f",this->force_val.force.x);
+//	log(Info,std::string("I received a force reading"));
 	Q_EMIT forceUpdated(); 
 
 }
@@ -72,13 +75,13 @@ bool QNode::init() {
 	full_drive = false;
 
 	offset_publisher = n.advertise<geometry_msgs::Twist>("stitch_offset", 10);
-	accept_stitch_publisher = n.advertise<std_msgs::Bool>("accept_stitch", 10);
-	repeat_stitch_publisher = n.advertise<std_msgs::Bool>("repeat_stitch", 10);
-	send_points_publisher = n.advertise<std_msgs::Bool>("send_points", 10);
+	accept_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/accept_stitch", 10);
+	repeat_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/repeat_stitch", 10);
+	send_points_publisher = n.advertise<std_msgs::Bool>("send_plan", 10);
 	half_drive_publisher = n.advertise<std_msgs::Bool>("half_drive", 10);
 	full_drive_publisher = n.advertise<std_msgs::Bool>("full_drive", 10);
 
-	force_subscriber = n.subscribe("force", 1, &QNode::getForce, this);
+	force_subscriber = n.subscribe("ft20610", 1, &QNode::getForce, this);
 
 	start();
 	return true;
@@ -104,13 +107,13 @@ bool QNode::init(const std::string &master_url, const std::string &host_url) {
 	full_drive = false;
 
 	offset_publisher = n.advertise<geometry_msgs::Twist>("stitch_offset", 10);
-	accept_stitch_publisher = n.advertise<std_msgs::Bool>("accept_stitch", 10);
-	repeat_stitch_publisher = n.advertise<std_msgs::Bool>("repeat_stitch", 10);
-	send_points_publisher = n.advertise<std_msgs::Bool>("send_points", 10);
+	accept_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/accept_stitch", 10);
+	repeat_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/repeat_stitch", 10);
+	send_points_publisher = n.advertise<std_msgs::Bool>("send_plan", 10);
 	half_drive_publisher = n.advertise<std_msgs::Bool>("half_drive", 10);
 	full_drive_publisher = n.advertise<std_msgs::Bool>("full_drive", 10);
 
-	force_subscriber = n.subscribe("force", 1, &QNode::getForce, this);
+	force_subscriber = n.subscribe("ft20610", 1, &QNode::getForce, this);
 	start();
 	return true;
 }
