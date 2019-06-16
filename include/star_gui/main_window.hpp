@@ -59,6 +59,7 @@ public Q_SLOTS:
 	void on_y_offset_valueChanged(int val);
 	
 	void updateForce();
+	void updateImage();
 
     /******************************************
     ** Manual connections

@@ -19,6 +19,7 @@
 #include <geometry_msgs/Wrench.h>
 #include <std_msgs/Bool.h>
 #include <std_msgs/Float32.h>
+#include <sensor_msgs/Image.h>
 #include <sstream>
 #include "../include/star_gui/qnode.hpp"
 
@@ -58,6 +59,16 @@ void QNode::getForce(const geometry_msgs::WrenchStamped & _data){
 	Q_EMIT forceUpdated(); 
 
 }
+
+void QNode::getImage(const sensor_msgs::Image & _data){
+	
+	
+	this->cam_img = _data;
+   //     ROS_INFO("recieved an image of widht: %d and height %d",this->cam_img.width, this->cam_img.height);
+//	log(Info,std::string("I received a force reading"));
+	Q_EMIT imageUpdated(); 
+
+}
 bool QNode::init() {
 	ros::init(init_argc,init_argv,"star_gui");
 	if ( ! ros::master::check() ) {
@@ -82,6 +93,7 @@ bool QNode::init() {
 	full_drive_publisher = n.advertise<std_msgs::Bool>("full_drive", 10);
 
 	force_subscriber = n.subscribe("ft20610", 1, &QNode::getForce, this);
+	image_subscriber = n.subscribe("/see_scope/nir/image_raw", 1, &QNode::getImage, this);
 
 	start();
 	return true;
@@ -114,6 +126,7 @@ bool QNode::init(const std::string &master_url, const std::string &host_url) {
 	full_drive_publisher = n.advertise<std_msgs::Bool>("full_drive", 10);
 
 	force_subscriber = n.subscribe("ft20610", 1, &QNode::getForce, this);
+	image_subscriber = n.subscribe("/see_scope/nir/image_raw", 1, &QNode::getImage, this);
 	start();
 	return true;
 }

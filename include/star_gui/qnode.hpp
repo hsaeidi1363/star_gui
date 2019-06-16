@@ -26,6 +26,7 @@
 #include <QStringListModel>
 #include <geometry_msgs/Wrench.h>
 #include <geometry_msgs/WrenchStamped.h>
+#include <sensor_msgs/Image.h>
 
 /*****************************************************************************
 ** Namespaces
@@ -45,6 +46,7 @@ public:
 	bool init();
 	bool init(const std::string &master_url, const std::string &host_url);
 	void getForce(const geometry_msgs::WrenchStamped & _data);
+	void getImage(const sensor_msgs::Image & _data);
 	void run();
 
 	/*********************
@@ -62,6 +64,8 @@ public:
 	void log( const LogLevel &level, const std::string &msg);
 
 	geometry_msgs::Wrench force_val;
+	sensor_msgs::Image cam_img;
+
 	bool accept_stitch;
 	bool repeat_stitch;
 	bool send_points;
@@ -76,6 +80,7 @@ Q_SIGNALS:
 	void loggingUpdated();
    	void rosShutdown();
 	void forceUpdated();
+	void imageUpdated();
 
 private:
 	int init_argc;
@@ -88,6 +93,7 @@ private:
 	ros::Publisher full_drive_publisher;
 
 	ros::Subscriber force_subscriber;
+	ros::Subscriber image_subscriber;
 	QStringListModel logging_model;
 };
 

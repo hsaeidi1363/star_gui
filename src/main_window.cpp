@@ -16,6 +16,9 @@
 #include "../include/star_gui/main_window.hpp"
 #include <stdlib.h>
 #include <ros/package.h>
+#include<cv_bridge/cv_bridge.h>
+#include<opencv2/imgproc/imgproc.hpp>
+#include<opencv2/highgui/highgui.hpp>
 
 /*****************************************************************************
 ** Namespaces
@@ -43,6 +46,7 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
     QObject::connect(ui.y_offset, SIGNAL(valueChanged(int)), SLOT(on_y_offset_valueChanged(int)));
 
     QObject::connect(&qnode, SIGNAL(forceUpdated()), this, SLOT(updateForce()));
+    QObject::connect(&qnode, SIGNAL(imageUpdated()), this, SLOT(updateImage()));
 
 
     ReadSettings();
@@ -183,6 +187,32 @@ void MainWindow::updateForce() {
         ui.force_x->setValue(qnode.force_val.force.x);
         ui.force_y->setValue(qnode.force_val.force.y);
         ui.force_z->setValue(qnode.force_val.force.z);
+}
+
+
+void MainWindow::updateImage() {
+        int width;
+	int height;
+	width = (int) qnode.cam_img.width;
+	height = (int) qnode.cam_img.height;
+	cv::Mat img;
+	cv_bridge::CvImagePtr cv_ptr;
+
+//        cv_ptr = cv_bridge::toCvCopy(qnode.cam_img,"mono8");
+        cv_ptr = cv_bridge::toCvCopy(qnode.cam_img,"rgb8");
+	// take the image part and put it in a mat variable in opencv format
+	img = cv_ptr->image;
+	
+   
+//    	QImage qim1((const uchar *) img.data, img.cols, img.rows, img.step, QImage::Format_Mono);
+    	QImage qim1((const uchar *) img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
+
+    	
+	QPixmap pix = QPixmap::fromImage(qim1);
+     	
+    	int width_view = (int) width/5;
+	int height_view = (int) height/5;
+  	ui.image_view->setPixmap(pix.scaled(width_view,height_view,Qt::KeepAspectRatio));
 }
 
 
