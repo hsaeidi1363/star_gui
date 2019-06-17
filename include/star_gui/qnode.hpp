@@ -71,9 +71,15 @@ public:
 	bool send_points;
 	bool half_drive;
 	bool full_drive;
+	bool global_offset;
+	
 
-	float x_offset;
-	float y_offset;
+	float x_offset_global;
+	float y_offset_global;
+	float z_offset_global;
+	float x_offset_single;
+	float y_offset_single;
+	float z_offset_single;
 
 
 Q_SIGNALS:

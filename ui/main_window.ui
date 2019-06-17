@@ -24,6 +24,12 @@
    <layout class="QHBoxLayout">
     <item>
      <widget class="QTabWidget" name="tab_manager">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="minimumSize">
        <size>
         <width>100</width>
@@ -53,9 +59,6 @@
            <string>Logging</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
-           <item row="2" column="0">
-            <widget class="QListView" name="view_logging"/>
-           </item>
            <item row="2" column="1">
             <widget class="QGroupBox" name="groupBox_4">
              <property name="title">
@@ -130,7 +133,7 @@
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>40</y>
+                <y>30</y>
                 <width>251</width>
                 <height>21</height>
                </rect>
@@ -155,7 +158,7 @@
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>100</y>
+                <y>80</y>
                 <width>251</width>
                 <height>21</height>
                </rect>
@@ -180,7 +183,7 @@
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>150</y>
+                <y>130</y>
                 <width>251</width>
                 <height>21</height>
                </rect>
@@ -205,7 +208,7 @@
               <property name="geometry">
                <rect>
                 <x>110</x>
-                <y>20</y>
+                <y>10</y>
                 <width>20</width>
                 <height>17</height>
                </rect>
@@ -232,8 +235,8 @@
              <widget class="QLabel" name="label_6">
               <property name="geometry">
                <rect>
-                <x>120</x>
-                <y>80</y>
+                <x>110</x>
+                <y>60</y>
                 <width>20</width>
                 <height>17</height>
                </rect>
@@ -260,8 +263,8 @@
              <widget class="QLabel" name="label_7">
               <property name="geometry">
                <rect>
-                <x>120</x>
-                <y>130</y>
+                <x>110</x>
+                <y>110</y>
                 <width>20</width>
                 <height>17</height>
                </rect>
@@ -303,6 +306,9 @@
              </property>
             </spacer>
            </item>
+           <item row="2" column="0">
+            <widget class="QListView" name="view_logging"/>
+           </item>
           </layout>
          </widget>
         </item>
@@ -318,7 +324,7 @@
      <x>0</x>
      <y>0</y>
      <width>944</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -358,7 +364,7 @@
     <set>Qt::RightDockWidgetArea</set>
    </property>
    <property name="windowTitle">
-    <string>Command Panel</string>
+    <string>&amp;Command Panel</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
@@ -382,11 +388,27 @@
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <widget class="QGroupBox" name="groupBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="title">
            <string>Ros Master</string>
           </property>
           <layout class="QGridLayout" name="gridLayout">
-           <item row="2" column="0">
+           <item row="5" column="1">
+            <widget class="QLineEdit" name="line_edit_topic">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>unused</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
             <widget class="QLabel" name="label_2">
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
@@ -399,8 +421,31 @@
              </property>
             </widget>
            </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="line_edit_master">
+             <property name="text">
+              <string>http://192.168.1.2:11311/</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QCheckBox" name="checkbox_remember_settings">
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="text">
+              <string>Remember settings on startup</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <widget class="QLabel" name="label">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
@@ -412,21 +457,7 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QLineEdit" name="line_edit_master">
-             <property name="text">
-              <string>http://192.168.1.2:11311/</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0" colspan="2">
-            <widget class="QLineEdit" name="line_edit_host">
-             <property name="text">
-              <string>192.168.1.67</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
+           <item row="5" column="0">
             <widget class="QLabel" name="label_3">
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
@@ -439,37 +470,7 @@
              </property>
             </widget>
            </item>
-           <item row="5" column="0" colspan="2">
-            <widget class="QLineEdit" name="line_edit_topic">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>unused</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkbox_use_environment">
-             <property name="layoutDirection">
-              <enum>Qt::RightToLeft</enum>
-             </property>
-             <property name="text">
-              <string>Use environment variables</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkbox_remember_settings">
-             <property name="layoutDirection">
-              <enum>Qt::RightToLeft</enum>
-             </property>
-             <property name="text">
-              <string>Remember settings on startup</string>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="0">
+           <item row="10" column="0">
             <spacer name="horizontalSpacer">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -482,7 +483,7 @@
              </property>
             </spacer>
            </item>
-           <item row="8" column="1">
+           <item row="10" column="1">
             <widget class="QPushButton" name="button_connect">
              <property name="enabled">
               <bool>true</bool>
@@ -504,6 +505,29 @@
              </property>
             </widget>
            </item>
+           <item row="9" column="0">
+            <widget class="QCheckBox" name="checkbox_use_environment">
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="text">
+              <string>Use environment variables</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLineEdit" name="line_edit_host">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>192.168.1.67</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </widget>
         </item>
@@ -512,11 +536,11 @@
           <property name="title">
            <string>Stitch Correction Tools</string>
           </property>
-          <widget class="QSlider" name="x_offset">
+          <widget class="QSlider" name="slider_x_offset">
            <property name="geometry">
             <rect>
-             <x>150</x>
-             <y>50</y>
+             <x>180</x>
+             <y>30</y>
              <width>200</width>
              <height>25</height>
             </rect>
@@ -570,9 +594,9 @@
           <widget class="QLabel" name="label_4">
            <property name="geometry">
             <rect>
-             <x>220</x>
-             <y>30</y>
-             <width>200</width>
+             <x>270</x>
+             <y>20</y>
+             <width>21</width>
              <height>17</height>
             </rect>
            </property>
@@ -589,59 +613,10 @@
             <locale language="English" country="UnitedStates"/>
            </property>
            <property name="text">
-            <string>Offset X</string>
+            <string>X</string>
            </property>
            <property name="textFormat">
             <enum>Qt::AutoText</enum>
-           </property>
-          </widget>
-          <widget class="QSlider" name="y_offset">
-           <property name="geometry">
-            <rect>
-             <x>80</x>
-             <y>70</y>
-             <width>50</width>
-             <height>197</height>
-            </rect>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>50</width>
-             <height>200</height>
-            </size>
-           </property>
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="minimum">
-            <number>-100</number>
-           </property>
-           <property name="maximum">
-            <number>100</number>
-           </property>
-           <property name="tracking">
-            <bool>true</bool>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="invertedAppearance">
-            <bool>true</bool>
-           </property>
-           <property name="invertedControls">
-            <bool>false</bool>
-           </property>
-           <property name="tickPosition">
-            <enum>QSlider::NoTicks</enum>
-           </property>
-           <property name="tickInterval">
-            <number>10</number>
            </property>
           </widget>
           <widget class="QPushButton" name="button_repeat_stitch">
@@ -660,9 +635,9 @@
           <widget class="QLabel" name="Offset">
            <property name="geometry">
             <rect>
-             <x>20</x>
-             <y>160</y>
-             <width>54</width>
+             <x>270</x>
+             <y>50</y>
+             <width>16</width>
              <height>17</height>
             </rect>
            </property>
@@ -670,17 +645,17 @@
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string>Offset Y</string>
+            <string>Y</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
            </property>
           </widget>
-          <widget class="QDoubleSpinBox" name="dsp_x">
+          <widget class="QDoubleSpinBox" name="dsp_x_offset">
            <property name="geometry">
             <rect>
-             <x>360</x>
-             <y>50</y>
+             <x>380</x>
+             <y>30</y>
              <width>62</width>
              <height>26</height>
             </rect>
@@ -701,11 +676,11 @@
             <double>0.100000000000000</double>
            </property>
           </widget>
-          <widget class="QDoubleSpinBox" name="dsp_y">
+          <widget class="QDoubleSpinBox" name="dsp_y_offset">
            <property name="geometry">
             <rect>
-             <x>20</x>
-             <y>180</y>
+             <x>380</x>
+             <y>70</y>
              <width>62</width>
              <height>26</height>
             </rect>
@@ -738,16 +713,263 @@
           <widget class="QLabel" name="image_view">
            <property name="geometry">
             <rect>
-             <x>140</x>
-             <y>90</y>
-             <width>201</width>
-             <height>161</height>
+             <x>60</x>
+             <y>150</y>
+             <width>341</width>
+             <height>241</height>
             </rect>
            </property>
            <property name="text">
             <string/>
            </property>
           </widget>
+          <widget class="QSlider" name="slider_y_offset">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>70</y>
+             <width>200</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="minimum">
+            <number>-100</number>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+           <property name="tracking">
+            <bool>true</bool>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>false</bool>
+           </property>
+           <property name="invertedControls">
+            <bool>false</bool>
+           </property>
+           <property name="tickPosition">
+            <enum>QSlider::NoTicks</enum>
+           </property>
+           <property name="tickInterval">
+            <number>10</number>
+           </property>
+          </widget>
+          <widget class="QSlider" name="slider_z_offset">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>110</y>
+             <width>200</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="minimum">
+            <number>-100</number>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+           <property name="tracking">
+            <bool>true</bool>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>false</bool>
+           </property>
+           <property name="invertedControls">
+            <bool>false</bool>
+           </property>
+           <property name="tickPosition">
+            <enum>QSlider::NoTicks</enum>
+           </property>
+           <property name="tickInterval">
+            <number>10</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="Offset_2">
+           <property name="geometry">
+            <rect>
+             <x>270</x>
+             <y>90</y>
+             <width>16</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string>Z</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+           </property>
+          </widget>
+          <widget class="QDoubleSpinBox" name="dsp_z_offset">
+           <property name="geometry">
+            <rect>
+             <x>380</x>
+             <y>110</y>
+             <width>62</width>
+             <height>26</height>
+            </rect>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="autoFillBackground">
+            <bool>true</bool>
+           </property>
+           <property name="wrapping">
+            <bool>false</bool>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
+           </property>
+           <property name="readOnly">
+            <bool>false</bool>
+           </property>
+           <property name="minimum">
+            <double>-100.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>100.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="button_reset_x_offset">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>30</y>
+             <width>41</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Reset</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="button_reset_y_offset">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>70</y>
+             <width>41</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Reset</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="button_reset_z_offset">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>110</y>
+             <width>41</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Reset</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="global_offseting">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>70</y>
+             <width>111</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Global offseting</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="single_point_offseting">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>111</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Single offseting</string>
+           </property>
+          </widget>
+          <zorder>slider_x_offset</zorder>
+          <zorder>label_4</zorder>
+          <zorder>button_repeat_stitch</zorder>
+          <zorder>Offset</zorder>
+          <zorder>dsp_x_offset</zorder>
+          <zorder>dsp_y_offset</zorder>
+          <zorder>image_view</zorder>
+          <zorder>slider_y_offset</zorder>
+          <zorder>slider_z_offset</zorder>
+          <zorder>Offset_2</zorder>
+          <zorder>dsp_z_offset</zorder>
+          <zorder>groupBox</zorder>
+          <zorder>groupBox</zorder>
+          <zorder>groupBox</zorder>
+          <zorder>button_reset_x_offset</zorder>
+          <zorder>button_reset_y_offset</zorder>
+          <zorder>button_reset_z_offset</zorder>
+          <zorder>global_offseting</zorder>
+          <zorder>single_point_offseting</zorder>
          </widget>
         </item>
        </layout>
@@ -792,7 +1014,7 @@
   </action>
   <action name="actionAbout_Qt">
    <property name="text">
-    <string>About &amp;Qt</string>
+    <string>A&amp;bout Qt</string>
    </property>
   </action>
  </widget>
@@ -833,7 +1055,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>x_offset</sender>
+   <sender>slider_x_offset</sender>
    <signal>sliderMoved(int)</signal>
    <receiver>MainWindowDesign</receiver>
    <slot>update()</slot>

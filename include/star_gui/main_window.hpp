@@ -55,8 +55,22 @@ public Q_SLOTS:
 	void on_button_half_drive_clicked(bool check );
 	void on_button_full_drive_clicked(bool check );
 
-	void on_x_offset_valueChanged(int val);
-	void on_y_offset_valueChanged(int val);
+
+	void on_button_reset_x_offset_clicked(bool check );
+	void on_button_reset_y_offset_clicked(bool check );
+	void on_button_reset_z_offset_clicked(bool check );
+
+	void on_global_offseting_stateChanged(int state );	
+	void on_single_point_offseting_stateChanged(int state );
+
+	void on_slider_x_offset_valueChanged(int val);
+	void on_slider_y_offset_valueChanged(int val);
+	void on_slider_z_offset_valueChanged(int val);
+
+
+	void on_dsp_x_offset_valueChanged(double val);
+	void on_dsp_y_offset_valueChanged(double val);
+	void on_dsp_z_offset_valueChanged(double val);
 	
 	void updateForce();
 	void updateImage();

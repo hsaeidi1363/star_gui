@@ -77,13 +77,18 @@ bool QNode::init() {
 	ros::start(); // explicitly needed since our nodehandle is going out of scope.
 	ros::NodeHandle n;
 	// Add your ros communications here.
-	x_offset = 0.1;
-	y_offset = 0.1;
+	x_offset_global = 0.0;
+	y_offset_global = 0.0;
+	z_offset_global = 0.0;
+	x_offset_single = 0.0;
+	y_offset_single = 0.0;
+	z_offset_single = 0.0;
 	accept_stitch = false;
 	repeat_stitch = false;
 	send_points = false;
 	half_drive = false;
 	full_drive = false;
+	global_offset = true;
 
 	offset_publisher = n.advertise<geometry_msgs::Twist>("stitch_offset", 10);
 	accept_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/accept_stitch", 10);
@@ -110,13 +115,18 @@ bool QNode::init(const std::string &master_url, const std::string &host_url) {
 	ros::start(); // explicitly needed since our nodehandle is going out of scope.
 	ros::NodeHandle n;
 	// Add your ros communications here.
-	x_offset = 0.1;
-	y_offset = 0.1;
+	x_offset_global = 0.0;
+	y_offset_global = 0.0;
+	z_offset_global = 0.0;
+	x_offset_single = 0.0;
+	y_offset_single = 0.0;
+	z_offset_single = 0.0;
 	accept_stitch = false;
 	repeat_stitch = false;
 	send_points = false;
 	half_drive = false;
 	full_drive = false;
+	global_offset = true;
 
 	offset_publisher = n.advertise<geometry_msgs::Twist>("stitch_offset", 10);
 	accept_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/accept_stitch", 10);
@@ -174,8 +184,13 @@ void QNode::run() {
 
 
 		geometry_msgs::Twist offset_msg;
-		offset_msg.linear.x = x_offset;
-		offset_msg.linear.y = y_offset;
+		offset_msg.linear.x = x_offset_global;
+		offset_msg.linear.y = y_offset_global;
+		offset_msg.linear.z = z_offset_global;
+		offset_msg.angular.x = x_offset_single;
+		offset_msg.angular.y = y_offset_single;		
+		offset_msg.angular.z = z_offset_single;
+
 		offset_publisher.publish(offset_msg);
 
 	

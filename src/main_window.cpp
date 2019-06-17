@@ -42,9 +42,19 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
     QPixmap pix((ros::package::getPath("star_gui") + "/resources/images/static_cam.png").c_str());
     ui.image_view->setPixmap(pix.scaled(200,160,Qt::KeepAspectRatio));
 
-    QObject::connect(ui.x_offset, SIGNAL(valueChanged(int)), SLOT(on_x_offset_valueChanged(int)));
-    QObject::connect(ui.y_offset, SIGNAL(valueChanged(int)), SLOT(on_y_offset_valueChanged(int)));
+    QObject::connect(ui.slider_x_offset, SIGNAL(valueChanged(int)), SLOT(on_slider_x_offset_valueChanged(int)));
+    QObject::connect(ui.slider_y_offset, SIGNAL(valueChanged(int)), SLOT(on_slider_y_offset_valueChanged(int)));
+    QObject::connect(ui.slider_z_offset, SIGNAL(valueChanged(int)), SLOT(on_slider_z_offset_valueChanged(int)));
 
+    QObject::connect(ui.dsp_x_offset, SIGNAL(valueChanged(double)), SLOT(on_dsp_x_offset_valueChanged(double)));
+    QObject::connect(ui.dsp_y_offset, SIGNAL(valueChanged(double)), SLOT(on_dsp_y_offset_valueChanged(double)));
+    QObject::connect(ui.dsp_z_offset, SIGNAL(valueChanged(double)), SLOT(on_dsp_z_offset_valueChanged(double)));
+
+    if (qnode.global_offset){
+	    ui.global_offseting->setCheckState(Checked);
+    }else{
+	    ui.single_point_offseting->setCheckState(Checked);
+    }
     QObject::connect(&qnode, SIGNAL(forceUpdated()), this, SLOT(updateForce()));
     QObject::connect(&qnode, SIGNAL(imageUpdated()), this, SLOT(updateImage()));
 
@@ -145,17 +155,122 @@ void MainWindow::on_button_full_drive_clicked(bool check ) {
 }
 
 
-void MainWindow::on_x_offset_valueChanged(int val){
-	qnode.x_offset = val*0.05;
-	ui.dsp_x->setValue(qnode.x_offset);
 
+void MainWindow::on_button_reset_x_offset_clicked(bool check ){
+	if(qnode.global_offset){
+		qnode.x_offset_global = 0.0;
+
+	}else{
+		qnode.x_offset_single = 0.0;
+	}
+	ui.slider_x_offset->setValue(0);
+	ui.dsp_x_offset->setValue(0.0);
+
+}	
+
+void MainWindow::on_button_reset_y_offset_clicked(bool check ){
+	if(qnode.global_offset){
+		qnode.y_offset_global = 0.0;
+
+	}else{
+		qnode.y_offset_single = 0.0;
+	}
+	ui.slider_y_offset->setValue(0);
+	ui.dsp_y_offset->setValue(0.0);
+
+}	
+
+void MainWindow::on_button_reset_z_offset_clicked(bool check ){
+	if(qnode.global_offset){
+		qnode.z_offset_global = 0.0;
+
+	}else{
+		qnode.z_offset_single = 0.0;
+	}
+	ui.slider_z_offset->setValue(0);
+	ui.dsp_z_offset->setValue(0.0);
+
+}	
+
+
+void MainWindow::on_global_offseting_stateChanged(int state ) {
+	qnode.global_offset = true;
+	ui.single_point_offseting->setCheckState(Unchecked);
+}
+
+void MainWindow::on_single_point_offseting_stateChanged(int state ) {
+	qnode.global_offset = false;
+	ui.global_offseting->setCheckState(Unchecked);
+	
 }
 
 
-void MainWindow::on_y_offset_valueChanged(int val){
-	qnode.y_offset = val*0.05;
-	ui.dsp_y->setValue(qnode.y_offset);
+
+void MainWindow::on_slider_x_offset_valueChanged(int val){
+	if(qnode.global_offset){
+		qnode.x_offset_global = val*0.05;
+		ui.dsp_x_offset->setValue(qnode.x_offset_global);
+	}else{
+		qnode.x_offset_single = val*0.05;
+		ui.dsp_x_offset->setValue(qnode.x_offset_single);	
+	}
 }
+
+
+void MainWindow::on_slider_y_offset_valueChanged(int val){
+	if(qnode.global_offset){
+		qnode.y_offset_global = val*0.05;
+		ui.dsp_y_offset->setValue(qnode.y_offset_global);
+	}else{
+		qnode.y_offset_single = val*0.05;
+		ui.dsp_y_offset->setValue(qnode.y_offset_single);	
+	}
+}
+
+
+void MainWindow::on_slider_z_offset_valueChanged(int val){
+	if(qnode.global_offset){	
+		qnode.z_offset_global = val*0.05;
+		ui.dsp_z_offset->setValue(qnode.z_offset_global);
+	}else{
+		qnode.z_offset_single = val*0.05;
+		ui.dsp_z_offset->setValue(qnode.z_offset_single);	
+	}
+	
+}
+
+
+
+
+
+
+void MainWindow::on_dsp_x_offset_valueChanged(double val){
+	if(qnode.global_offset){
+		qnode.x_offset_global = val;
+	}else{
+		qnode.x_offset_single = val;
+	}
+	ui.slider_x_offset->setValue((int) (val*20));
+}
+
+void MainWindow::on_dsp_y_offset_valueChanged(double val){
+	if(qnode.global_offset){
+		qnode.y_offset_global = val;
+	}else{
+		qnode.y_offset_single = val;
+	}
+	ui.slider_y_offset->setValue((int) (val*20));
+}
+
+void MainWindow::on_dsp_z_offset_valueChanged(double val){
+	if(qnode.global_offset){
+		qnode.z_offset_global = val;
+	}else{
+		qnode.z_offset_single = val;
+	}
+	ui.slider_z_offset->setValue((int) (val*20));
+}
+
 
 
 void MainWindow::on_checkbox_use_environment_stateChanged(int state) {
