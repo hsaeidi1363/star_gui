@@ -67,6 +67,7 @@ public:
 	sensor_msgs::Image cam_img;
 
 	bool accept_stitch;
+	bool accept_offset;
 	bool repeat_stitch;
 	bool send_points;
 	bool half_drive;
@@ -93,6 +94,7 @@ private:
 	char** init_argv;
 	ros::Publisher offset_publisher;
 	ros::Publisher accept_stitch_publisher;
+	ros::Publisher accept_offset_publisher;
 	ros::Publisher repeat_stitch_publisher;
 	ros::Publisher send_points_publisher;
 	ros::Publisher half_drive_publisher;

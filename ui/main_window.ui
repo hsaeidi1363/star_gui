@@ -324,7 +324,7 @@
      <x>0</x>
      <y>0</y>
      <width>944</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -929,47 +929,41 @@
            <property name="geometry">
             <rect>
              <x>10</x>
-             <y>70</y>
+             <y>60</y>
              <width>111</width>
              <height>31</height>
             </rect>
            </property>
            <property name="text">
-            <string>Global offseting</string>
+            <string>Global offset</string>
            </property>
           </widget>
           <widget class="QCheckBox" name="single_point_offseting">
            <property name="geometry">
             <rect>
              <x>10</x>
-             <y>110</y>
+             <y>90</y>
              <width>111</width>
              <height>31</height>
             </rect>
            </property>
            <property name="text">
-            <string>Single offseting</string>
+            <string>Single offset</string>
            </property>
           </widget>
-          <zorder>slider_x_offset</zorder>
-          <zorder>label_4</zorder>
-          <zorder>button_repeat_stitch</zorder>
-          <zorder>Offset</zorder>
-          <zorder>dsp_x_offset</zorder>
-          <zorder>dsp_y_offset</zorder>
-          <zorder>image_view</zorder>
-          <zorder>slider_y_offset</zorder>
-          <zorder>slider_z_offset</zorder>
-          <zorder>Offset_2</zorder>
-          <zorder>dsp_z_offset</zorder>
-          <zorder>groupBox</zorder>
-          <zorder>groupBox</zorder>
-          <zorder>groupBox</zorder>
-          <zorder>button_reset_x_offset</zorder>
-          <zorder>button_reset_y_offset</zorder>
-          <zorder>button_reset_z_offset</zorder>
-          <zorder>global_offseting</zorder>
-          <zorder>single_point_offseting</zorder>
+          <widget class="QPushButton" name="button_accept_offset">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>120</y>
+             <width>81</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Accept Offset</string>
+           </property>
+          </widget>
          </widget>
         </item>
        </layout>

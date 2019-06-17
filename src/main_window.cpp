@@ -134,6 +134,12 @@ void MainWindow::on_button_repeat_stitch_clicked(bool check ) {
 }
 
 
+void MainWindow::on_button_accept_offset_clicked(bool check ) {
+	qnode.accept_offset = true;
+	
+}
+
+
 void MainWindow::on_button_send_points_clicked(bool check ) {
 	qnode.send_points = true;
 	
