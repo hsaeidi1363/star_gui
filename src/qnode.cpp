@@ -84,6 +84,7 @@ bool QNode::init() {
 	y_offset_single = 0.0;
 	z_offset_single = 0.0;
 	accept_stitch = false;
+	accept_tension = false;
 	repeat_stitch = false;
 	send_points = false;
 	half_drive = false;
@@ -92,6 +93,7 @@ bool QNode::init() {
 
 	offset_publisher = n.advertise<geometry_msgs::Twist>("stitch_offset", 10);
 	accept_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/accept_stitch", 10);
+	accept_tension_publisher = n.advertise<std_msgs::Bool>("/suture/accept_tension", 10);
 	accept_offset_publisher = n.advertise<std_msgs::Bool>("/suture/accept_offset", 10);
 	repeat_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/repeat_stitch", 10);
 	send_points_publisher = n.advertise<std_msgs::Bool>("send_plan", 10);
@@ -131,6 +133,7 @@ bool QNode::init(const std::string &master_url, const std::string &host_url) {
 
 	offset_publisher = n.advertise<geometry_msgs::Twist>("stitch_offset", 10);
 	accept_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/accept_stitch", 10);
+	accept_tension_publisher = n.advertise<std_msgs::Bool>("/suture/accept_tension", 10);
 	accept_offset_publisher = n.advertise<std_msgs::Bool>("/suture/accept_offset", 10);
 	repeat_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/repeat_stitch", 10);
 	send_points_publisher = n.advertise<std_msgs::Bool>("send_plan", 10);
@@ -153,6 +156,13 @@ void QNode::run() {
 			accept_msg.data = true;
 			accept_stitch_publisher.publish(accept_msg);
 			accept_stitch = false;
+		}
+
+		if(accept_tension){
+			std_msgs::Bool accept_msg;
+			accept_msg.data = true;
+			accept_tension_publisher.publish(accept_msg);
+			accept_tension = false;
 		}
 
 

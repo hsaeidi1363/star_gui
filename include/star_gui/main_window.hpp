@@ -50,6 +50,7 @@ public Q_SLOTS:
 	void on_checkbox_use_environment_stateChanged(int state);
 	// added for the star_gui
 	void on_button_accept_stitch_clicked(bool check );
+	void on_button_accept_tension_clicked(bool check );
 	void on_button_accept_offset_clicked(bool check );
 	void on_button_repeat_stitch_clicked(bool check );
 	void on_button_send_points_clicked(bool check );
