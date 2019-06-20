@@ -56,6 +56,8 @@ public Q_SLOTS:
 	void on_button_send_points_clicked(bool check );
 	void on_button_half_drive_clicked(bool check );
 	void on_button_full_drive_clicked(bool check );
+	void on_button_save_rcm_clicked(bool check );
+	void on_button_set_rcm_clicked(bool check );
 
 
 	void on_button_reset_x_offset_clicked(bool check );

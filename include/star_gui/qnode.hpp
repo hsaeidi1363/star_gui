@@ -74,6 +74,8 @@ public:
 	bool half_drive;
 	bool full_drive;
 	bool global_offset;
+	bool save_rcm;
+	bool set_rcm;
 	
 
 	float x_offset_global;
@@ -101,6 +103,8 @@ private:
 	ros::Publisher send_points_publisher;
 	ros::Publisher half_drive_publisher;
 	ros::Publisher full_drive_publisher;
+	ros::Publisher save_rcm_publisher;
+	ros::Publisher set_rcm_publisher;
 
 	ros::Subscriber force_subscriber;
 	ros::Subscriber image_subscriber;

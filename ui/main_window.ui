@@ -59,7 +59,79 @@
            <string>Logging</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="0" rowspan="2">
+           <item row="1" column="1" rowspan="2">
+            <widget class="QGroupBox" name="groupBox_4">
+             <property name="title">
+              <string>Command options</string>
+             </property>
+             <widget class="QPushButton" name="button_accept_stitch">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>100</y>
+                <width>91</width>
+                <height>25</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Accept Stitch</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="button_send_points">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>30</y>
+                <width>91</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Update Plan</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="button_half_drive">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>230</y>
+                <width>91</width>
+                <height>25</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Half Drive</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="button_full_drive">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>300</y>
+                <width>91</width>
+                <height>25</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Full Drive</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="button_accept_tension">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>160</y>
+                <width>91</width>
+                <height>25</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Accept Tension</string>
+              </property>
+             </widget>
+            </widget>
+           </item>
+           <item row="0" column="0">
             <widget class="QGroupBox" name="groupBox_3">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -231,44 +303,28 @@
              </widget>
             </widget>
            </item>
-           <item row="0" column="1" rowspan="2">
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+           <item row="1" column="0" rowspan="2">
+            <widget class="QListView" name="view_logging">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
              </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>200</height>
-              </size>
-             </property>
-            </spacer>
+            </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QListView" name="view_logging"/>
-           </item>
-           <item row="2" column="1">
-            <widget class="QGroupBox" name="groupBox_4">
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="groupBox_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="title">
-              <string>Command options</string>
+              <string>RCM setting</string>
              </property>
-             <widget class="QPushButton" name="button_accept_stitch">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>100</y>
-                <width>91</width>
-                <height>25</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>Accept Stitch</string>
-              </property>
-             </widget>
-             <widget class="QPushButton" name="button_send_points">
+             <widget class="QPushButton" name="button_save_rcm">
               <property name="geometry">
                <rect>
                 <x>20</x>
@@ -278,46 +334,20 @@
                </rect>
               </property>
               <property name="text">
-               <string>Update Plan</string>
+               <string>Save RCM</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="button_half_drive">
+             <widget class="QPushButton" name="button_set_rcm">
               <property name="geometry">
                <rect>
                 <x>20</x>
-                <y>230</y>
+                <y>80</y>
                 <width>91</width>
-                <height>25</height>
+                <height>31</height>
                </rect>
               </property>
               <property name="text">
-               <string>Half Drive</string>
-              </property>
-             </widget>
-             <widget class="QPushButton" name="button_full_drive">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>300</y>
-                <width>91</width>
-                <height>25</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>Full Drive</string>
-              </property>
-             </widget>
-             <widget class="QPushButton" name="button_accept_tension">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>160</y>
-                <width>91</width>
-                <height>25</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>Accept Tension</string>
+               <string>Set RCM</string>
               </property>
              </widget>
             </widget>

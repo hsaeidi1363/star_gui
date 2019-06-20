@@ -85,11 +85,14 @@ bool QNode::init() {
 	z_offset_single = 0.0;
 	accept_stitch = false;
 	accept_tension = false;
+	accept_offset = false;
 	repeat_stitch = false;
 	send_points = false;
 	half_drive = false;
 	full_drive = false;
 	global_offset = true;
+	save_rcm = false;
+	set_rcm = false;
 
 	offset_publisher = n.advertise<geometry_msgs::Twist>("stitch_offset", 10);
 	accept_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/accept_stitch", 10);
@@ -99,6 +102,8 @@ bool QNode::init() {
 	send_points_publisher = n.advertise<std_msgs::Bool>("send_plan", 10);
 	half_drive_publisher = n.advertise<std_msgs::Bool>("half_drive", 10);
 	full_drive_publisher = n.advertise<std_msgs::Bool>("full_drive", 10);
+	save_rcm_publisher = n.advertise<std_msgs::Bool>("/suture/save_rcm", 10);
+	set_rcm_publisher = n.advertise<std_msgs::Bool>("/suture/set_rcm", 10);
 
 	force_subscriber = n.subscribe("ft20610", 1, &QNode::getForce, this);
 	image_subscriber = n.subscribe("/see_scope/nir/image_raw", 1, &QNode::getImage, this);
@@ -125,11 +130,16 @@ bool QNode::init(const std::string &master_url, const std::string &host_url) {
 	y_offset_single = 0.0;
 	z_offset_single = 0.0;
 	accept_stitch = false;
+	accept_tension = false;
+	accept_offset = false;
 	repeat_stitch = false;
 	send_points = false;
 	half_drive = false;
 	full_drive = false;
 	global_offset = true;
+	save_rcm = false;
+	set_rcm = false;
+
 
 	offset_publisher = n.advertise<geometry_msgs::Twist>("stitch_offset", 10);
 	accept_stitch_publisher = n.advertise<std_msgs::Bool>("/suture/accept_stitch", 10);
@@ -139,6 +149,9 @@ bool QNode::init(const std::string &master_url, const std::string &host_url) {
 	send_points_publisher = n.advertise<std_msgs::Bool>("send_plan", 10);
 	half_drive_publisher = n.advertise<std_msgs::Bool>("half_drive", 10);
 	full_drive_publisher = n.advertise<std_msgs::Bool>("full_drive", 10);
+	save_rcm_publisher = n.advertise<std_msgs::Bool>("/suture/save_rcm", 10);
+	set_rcm_publisher = n.advertise<std_msgs::Bool>("/suture/set_rcm", 10);
+
 
 	force_subscriber = n.subscribe("ft20610", 1, &QNode::getForce, this);
 	image_subscriber = n.subscribe("/see_scope/nir/image_raw", 1, &QNode::getImage, this);
@@ -156,6 +169,7 @@ void QNode::run() {
 			accept_msg.data = true;
 			accept_stitch_publisher.publish(accept_msg);
 			accept_stitch = false;
+			log(Info,std::string("Stitch Accepted"));
 		}
 
 		if(accept_tension){
@@ -163,6 +177,7 @@ void QNode::run() {
 			accept_msg.data = true;
 			accept_tension_publisher.publish(accept_msg);
 			accept_tension = false;
+			log(Info,std::string("Tension Accepted"));
 		}
 
 
@@ -171,6 +186,7 @@ void QNode::run() {
 			repeat_msg.data = true;
 			repeat_stitch_publisher.publish(repeat_msg);
 			repeat_stitch = false;
+			log(Info,std::string("Repeat Stitch"));
 		}
 
 		if(send_points){
@@ -178,6 +194,7 @@ void QNode::run() {
 			send_pts_msg.data = true;
 			send_points_publisher.publish(send_pts_msg);
 			send_points = false;
+			log(Info,std::string("Suture Plan Updated"));
 		}
 
 		if(half_drive){
@@ -185,6 +202,7 @@ void QNode::run() {
 			half_drive_msg.data = true;
 			half_drive_publisher.publish(half_drive_msg);
 			half_drive = false;
+			log(Info,std::string("Half Drive CMD"));
 		}
 
 		if(full_drive){
@@ -192,6 +210,7 @@ void QNode::run() {
 			full_drive_msg.data = true;
 			full_drive_publisher.publish(full_drive_msg);
 			full_drive = false;
+			log(Info,std::string("Full Drive CMD"));
 		}
 		
 		if(accept_offset){
@@ -199,7 +218,29 @@ void QNode::run() {
 			accept_msg.data = true;
 			accept_offset_publisher.publish(accept_msg);
 			accept_offset = false;
+			log(Info,std::string("Offsets Accepted"));
+
 		}
+
+
+		if(save_rcm){
+			std_msgs::Bool accept_msg;
+			accept_msg.data = true;
+			save_rcm_publisher.publish(accept_msg);
+			save_rcm = false;
+			log(Info,std::string("RCM Saved"));
+
+		}
+
+		if(set_rcm){
+			std_msgs::Bool accept_msg;
+			accept_msg.data = true;
+			set_rcm_publisher.publish(accept_msg);
+			set_rcm = false;
+			log(Info,std::string("RCM Set"));
+
+		}
+
 
 
 		geometry_msgs::Twist offset_msg;

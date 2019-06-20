@@ -147,9 +147,19 @@ void MainWindow::on_button_send_points_clicked(bool check ) {
 }
 
 
+void MainWindow::on_button_save_rcm_clicked(bool check ) {
+	qnode.save_rcm = true;
+	
+}
+
+void MainWindow::on_button_set_rcm_clicked(bool check ) {
+	qnode.set_rcm = true;
+	
+}
+
+
 void MainWindow::on_button_half_drive_clicked(bool check ) {
 	//system((ros::package::getPath("endo360_rtt") + "/scripts/endo360-halfdrv.sh").c_str());
-	
         system((ros::package::getPath("proxisure_rtt") + "/scripts/proxisure-halfdrv.sh").c_str());
         qnode.half_drive = true;
 	
