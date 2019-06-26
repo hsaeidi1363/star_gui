@@ -50,7 +50,7 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
     QObject::connect(ui.dsp_y_offset, SIGNAL(valueChanged(double)), SLOT(on_dsp_y_offset_valueChanged(double)));
     QObject::connect(ui.dsp_z_offset, SIGNAL(valueChanged(double)), SLOT(on_dsp_z_offset_valueChanged(double)));
 
-    if (qnode.global_offset){
+    if (!qnode.global_offset){
 	    ui.global_offseting->setCheckState(Checked);
     }else{
 	    ui.single_point_offseting->setCheckState(Checked);

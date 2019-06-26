@@ -62,13 +62,13 @@
            <item row="1" column="1" rowspan="2">
             <widget class="QGroupBox" name="groupBox_4">
              <property name="title">
-              <string>Command options</string>
+              <string>Stitch Verification</string>
              </property>
              <widget class="QPushButton" name="button_accept_stitch">
               <property name="geometry">
                <rect>
                 <x>20</x>
-                <y>100</y>
+                <y>40</y>
                 <width>91</width>
                 <height>25</height>
                </rect>
@@ -77,24 +77,11 @@
                <string>Accept Stitch</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="button_send_points">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>30</y>
-                <width>91</width>
-                <height>31</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>Update Plan</string>
-              </property>
-             </widget>
              <widget class="QPushButton" name="button_half_drive">
               <property name="geometry">
                <rect>
                 <x>20</x>
-                <y>230</y>
+                <y>250</y>
                 <width>91</width>
                 <height>25</height>
                </rect>
@@ -107,7 +94,7 @@
               <property name="geometry">
                <rect>
                 <x>20</x>
-                <y>300</y>
+                <y>320</y>
                 <width>91</width>
                 <height>25</height>
                </rect>
@@ -120,13 +107,26 @@
               <property name="geometry">
                <rect>
                 <x>20</x>
-                <y>160</y>
+                <y>180</y>
                 <width>91</width>
                 <height>25</height>
                </rect>
               </property>
               <property name="text">
                <string>Accept Tension</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="button_repeat_stitch">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>110</y>
+                <width>91</width>
+                <height>25</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Repeat Stitch</string>
               </property>
              </widget>
             </widget>
@@ -152,7 +152,10 @@
                </rect>
               </property>
               <property name="minimum">
-               <number>-100</number>
+               <number>-20</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
               </property>
               <property name="value">
                <number>0</number>
@@ -177,7 +180,10 @@
                </rect>
               </property>
               <property name="minimum">
-               <number>-100</number>
+               <number>-20</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
               </property>
               <property name="value">
                <number>0</number>
@@ -202,7 +208,10 @@
                </rect>
               </property>
               <property name="minimum">
-               <number>-100</number>
+               <number>-20</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
               </property>
               <property name="value">
                <number>0</number>
@@ -393,7 +402,7 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>480</width>
+     <width>506</width>
      <height>532</height>
     </size>
    </property>
@@ -441,6 +450,16 @@
            <string>Ros Master</string>
           </property>
           <layout class="QGridLayout" name="gridLayout">
+           <item row="9" column="0">
+            <widget class="QCheckBox" name="checkbox_use_environment">
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="text">
+              <string>Use environment variables</string>
+             </property>
+            </widget>
+           </item>
            <item row="5" column="1">
             <widget class="QLineEdit" name="line_edit_topic">
              <property name="enabled">
@@ -548,16 +567,6 @@
              </property>
             </widget>
            </item>
-           <item row="9" column="0">
-            <widget class="QCheckBox" name="checkbox_use_environment">
-             <property name="layoutDirection">
-              <enum>Qt::RightToLeft</enum>
-             </property>
-             <property name="text">
-              <string>Use environment variables</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0">
             <widget class="QLineEdit" name="line_edit_host">
              <property name="sizePolicy">
@@ -577,7 +586,7 @@
         <item>
          <widget class="QGroupBox" name="groupBox_2">
           <property name="title">
-           <string>Stitch Correction Tools</string>
+           <string>Stitch Initialization and Correction Tools</string>
           </property>
           <widget class="QSlider" name="slider_x_offset">
            <property name="geometry">
@@ -662,19 +671,6 @@
             <enum>Qt::AutoText</enum>
            </property>
           </widget>
-          <widget class="QPushButton" name="button_repeat_stitch">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>30</y>
-             <width>101</width>
-             <height>25</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Repeat Stitch</string>
-           </property>
-          </widget>
           <widget class="QLabel" name="Offset">
            <property name="geometry">
             <rect>
@@ -756,8 +752,8 @@
           <widget class="QLabel" name="image_view">
            <property name="geometry">
             <rect>
-             <x>60</x>
-             <y>150</y>
+             <x>120</x>
+             <y>140</y>
              <width>341</width>
              <height>241</height>
             </rect>
@@ -1005,6 +1001,19 @@
            </property>
            <property name="text">
             <string>Accept Offset</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="button_send_points">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>91</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Update Plan</string>
            </property>
           </widget>
          </widget>
